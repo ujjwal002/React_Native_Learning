@@ -6,24 +6,57 @@
  */
 
 import React from 'react';
-import {Text, View, Button, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  Button,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+} from 'react-native';
+import {useState} from 'react';
 
 function App(): JSX.Element {
-  var name = 'ujjwal kumar';
+  const [name, setName] = useState('');
+
+  const [todoList, setTodoList] = useState([]);
+  function addtext(text: string): void {
+    console.log(text);
+
+    setName(text);
+  }
+  function addList(): void {
+    if (name !== '') {
+      setTodoList([...todoList, name]);
+      setName('');
+    }
+  }
   return (
-    <View>
-      <Text style={{fontSize: 40}}>You are going to grow</Text>
-      <Text style={{fontSize: 80, color: 'red'}}>hello i am ujjwal</Text>
-      <Text style={styles.container}>{name}</Text>
-      <Button title="press me" />
+    <View style={styles.container}>
+      <View>
+        <TextInput placeholder="Add your to do" onChangeText={addtext} />
+        <Button title="Add todo" onPress={addList} />
+      </View>
+      {/* <ScrollView>
+        {todoList.map(todo => (
+          <Text style={styles.todoStyle}>{todo}</Text>
+        ))}
+      </ScrollView> */}
+      {/* optimized way to load list bcz in scroll view this load the data at once this will slow the list so we use flatlist */}
+      <ScrollView>
+        {todoList.map(todo => (
+          <Text style={styles.todoStyle}>{todo}</Text>
+        ))}
+      </ScrollView>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
-    color: 'white',
-    fontSize: 20,
+    padding: 20,
+  },
+  todoStyle: {
+    margin: 40,
   },
 });
 
