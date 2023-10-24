@@ -13,6 +13,7 @@ import {
   StyleSheet,
   TextInput,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import {useState} from 'react';
 
@@ -43,11 +44,13 @@ function App(): JSX.Element {
         ))}
       </ScrollView> */}
       {/* optimized way to load list bcz in scroll view this load the data at once this will slow the list so we use flatlist */}
-      <ScrollView>
-        {todoList.map(todo => (
-          <Text style={styles.todoStyle}>{todo}</Text>
-        ))}
-      </ScrollView>
+      <FlatList
+        style={styles.todoList}
+        data={todoList}
+        renderItem={todoItem => {
+          return <Text style={styles.todoStyle}>{todoItem.item}</Text>;
+        }}
+      />
     </View>
   );
 }
@@ -57,6 +60,9 @@ const styles = StyleSheet.create({
   },
   todoStyle: {
     margin: 40,
+  },
+  todoList: {
+    height: '85%',
   },
 });
 
