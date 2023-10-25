@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import {
   Text,
@@ -17,41 +10,43 @@ import {
 } from 'react-native';
 import {useState} from 'react';
 
+import Navbar from './components/Navbar';
+
 function App(): JSX.Element {
-  const [name, setName] = useState('');
+  // const [name, setName] = useState('');
 
-  const [todoList, setTodoList] = useState([]);
-  function addtext(text: string): void {
-    console.log(text);
+  // const [todoList, setTodoList] = useState([]);
+  // function addtext(text: string): void {
+  //   console.log(text);
 
-    setName(text);
-  }
-  function addList(): void {
-    if (name !== '') {
-      setTodoList([...todoList, name]);
-      setName('');
-    }
-  }
+  //   setName(text);
+  // }
+  // function addList(): void {
+  //   if (name !== '') {
+  //     setTodoList([...todoList, {name, key: Math.random().toString()}]);
+  //     setName('');
+  //   }
+  // }
   return (
-    <View style={styles.container}>
-      <View>
-        <TextInput placeholder="Add your to do" onChangeText={addtext} />
-        <Button title="Add todo" onPress={addList} />
-      </View>
-      {/* <ScrollView>
-        {todoList.map(todo => (
-          <Text style={styles.todoStyle}>{todo}</Text>
-        ))}
-      </ScrollView> */}
-      {/* optimized way to load list bcz in scroll view this load the data at once this will slow the list so we use flatlist */}
-      <FlatList
-        style={styles.todoList}
-        data={todoList}
-        renderItem={todoItem => {
-          return <Text style={styles.todoStyle}>{todoItem.item}</Text>;
-        }}
-      />
-    </View>
+    // <View style={styles.container}>
+    //   <View>
+    //     <TextInput
+    //       placeholder="Add your to do"
+    //       onChangeText={addtext}
+    //       value={name}
+    //     />
+    //     <Button title="Add todo" color={'black'} onPress={addList} />
+    //   </View>
+    //   /
+    //   <FlatList
+    //     style={styles.todoList}
+    //     data={todoList}
+    //     renderItem={todoItem => {
+    //       return <Text style={styles.todoStyle}>{todoItem.item.name}</Text>;
+    //     }}
+    //   />
+    // </View>
+    <Navbar />
   );
 }
 const styles = StyleSheet.create({
@@ -59,7 +54,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   todoStyle: {
-    margin: 40,
+    padding: 40,
+    backgroundColor: 'red',
+    color: 'white',
+    margin: 20,
   },
   todoList: {
     height: '85%',
